@@ -44,7 +44,6 @@ export default {
     },
     mounted: function() {
         this.DSOptions = this.$root.dsItems
-        console.log(this.$root.dsItems);
     }
 }
 </script>
