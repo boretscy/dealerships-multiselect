@@ -7,7 +7,6 @@ let apps = document.getElementsByName('yugavto-multiselect')
 var sets = []
 
 apps.forEach( function(a) {
-    console.log(a)
     sets.push({
         dsItems: window[a.getAttribute('data')],
         mode: a.getAttribute('mode'),
