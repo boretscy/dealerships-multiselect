@@ -9,6 +9,7 @@
             track-by="code" 
             :options="DSOptions" 
             :searchable="false"
+            :multiple="( mode == 'multi' ) ? true : false"
             selectLabel="Выбрать"
             selectedLabel="Выбрано"
             deselectLabel="Удалить"
@@ -28,16 +29,19 @@ export default {
         return {
             value: null,
             DSValue: [],
-            DSOptions: []
+            DSOptions: [],
+            mode: this.$root.mode
         }
     },
     watch: {
         DSValue: function() {
+            console.log( this.DSValue )
             let s = []
             this.DSValue.forEach( function(item) {
                 s.push(item.code)
             })
             this.value = s.join(',')
+            console.log(this.value)
         }
     },
     mounted: function() {

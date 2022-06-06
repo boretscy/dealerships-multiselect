@@ -6,8 +6,9 @@ Vue.config.productionTip = false
 new Vue({
   data() {
     return {
-      dsItems: window.DEALERSHIPS
+      dsItems: window[document.getElementById('yugavto-multiselect').getAttribute('data')],
+      mode: document.getElementById('yugavto-multiselect').getAttribute('mode')
     }
   },
   render: h => h(App),
-}).$mount('#dealerships-multiselect')
+}).$mount('#yugavto-multiselect')
