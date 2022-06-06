@@ -4,17 +4,23 @@ import App from './App.vue'
 Vue.config.productionTip = false
 
 let apps = document.getElementsByName('yugavto-multiselect')
+var sets = []
 
 apps.forEach( function(a) {
     console.log(a)
+    sets.push({
+        dsItems: window[a.getAttribute('data')],
+        mode: a.getAttribute('mode'),
+        placeholder: a.getAttribute('placeholder'),
+        instns: a.id
+    })
+})
+
+sets.forEach( function(s) {
     new Vue({
         data() {
-            return {
-                dsItems: window[a.getAttribute('data')],
-                mode: a.getAttribute('mode'),
-                placeholder: a.getAttribute('placeholder')
-            }
+            return s
         },
         render: h => h(App),
-    }).$mount('#'+a.id)
+    }).$mount('#'+s.instns)
 })
