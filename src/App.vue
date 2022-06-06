@@ -8,8 +8,6 @@
             label="name" 
             track-by="code" 
             :options="DSOptions" 
-            :multiple="true" 
-            :taggable="true" 
             :searchable="false"
             selectLabel="Выбрать"
             selectedLabel="Выбрано"
