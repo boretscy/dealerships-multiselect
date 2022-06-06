@@ -4,7 +4,7 @@
         <multiselect 
             v-model="DSValue" 
             tag-placeholder="Выбрать автосалон" 
-            placeholder="Марка" 
+            :placeholder="placeholder" 
             label="name" 
             track-by="code" 
             :options="DSOptions" 
@@ -30,18 +30,21 @@ export default {
             value: null,
             DSValue: [],
             DSOptions: [],
-            mode: this.$root.mode
+            mode: this.$root.mode,
+            placeholder: this.$root.placeholder
         }
     },
     watch: {
         DSValue: function() {
-            console.log( this.DSValue )
-            let s = []
-            this.DSValue.forEach( function(item) {
-                s.push(item.code)
-            })
-            this.value = s.join(',')
-            console.log(this.value)
+            if ( this.mode == 'multi' ) {
+                let s = []
+                this.DSValue.forEach( function(item) {
+                    s.push(item.code)
+                })
+                this.value = s.join(',')
+            } else {
+                this.value = this.DSValue.code
+            }
         }
     },
     mounted: function() {
