@@ -6,7 +6,7 @@ Vue.config.productionTip = false
 let apps = document.getElementsByName('yugavto-multiselect')
 
 apps.forEach( function(a) {
-  
+    console.log(a)
     new Vue({
         data() {
             return {
