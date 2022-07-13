@@ -10,13 +10,12 @@
             :options="DSOptions" 
             :searchable="false"
             :multiple="( mode == 'multi' ) ? true : false"
-
-                    :close-on-select="false" 
-                    :clear-on-select="false"
-                    :closeOnSelect="true"
             selectLabel="Выбрать"
             selectedLabel="Выбрано"
             deselectLabel="Удалить"
+            :close-on-select="false" 
+            :clear-on-select="false"
+            :closeOnSelect="true"
             />
     </div>
 </template>
