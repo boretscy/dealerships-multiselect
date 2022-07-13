@@ -10,6 +10,10 @@
             :options="DSOptions" 
             :searchable="false"
             :multiple="( mode == 'multi' ) ? true : false"
+
+                    :close-on-select="false" 
+                    :clear-on-select="false"
+                    :closeOnSelect="true"
             selectLabel="Выбрать"
             selectedLabel="Выбрано"
             deselectLabel="Удалить"
@@ -134,7 +138,7 @@ fieldset[disabled] .multiselect {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
-.multiselect--active .var(--yadarkblue) {
+.multiselect--active {
   transform: rotateZ(180deg);
 }
 .multiselect--above.multiselect--active .multiselect__current,
