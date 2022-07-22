@@ -1,15 +1,15 @@
 <template>
     <div>
-        <input type="hidden" name="DEALERSHIP" v-model="value" />
+        <input type="hidden" :name="$root.input_name" v-model="value" />
         <multiselect 
-            v-model="DSValue" 
-            tag-placeholder="Выбрать автосалон" 
-            :placeholder="placeholder" 
+            v-model="RValue" 
+            tag-placeholder="Ничего не выбрано" 
+            :placeholder="$root.placeholder" 
             label="name" 
             track-by="code" 
-            :options="DSOptions" 
+            :options="options" 
             :searchable="false"
-            :multiple="( mode == 'multi' ) ? true : false"
+            :multiple="( $root.mode == 'multi' ) ? true : false"
             selectLabel="Выбрать"
             selectedLabel="Выбрано"
             deselectLabel="Удалить"
@@ -31,27 +31,65 @@ export default {
     data() {
         return {
             value: null,
-            DSValue: [],
-            DSOptions: [],
-            mode: this.$root.mode,
-            placeholder: this.$root.placeholder
+            RValue: [],
+            options: [],
+            parent_var_value: window[this.$root.parent_var]
         }
     },
     watch: {
-        DSValue: function() {
-            if ( this.mode == 'multi' ) {
+        RValue: function( val ) {
+            console.log( val )
+            if ( this.$root.mode == 'multi' ) {
                 let s = []
-                this.DSValue.forEach( function(item) {
+                val.forEach( function(item) {
                     s.push(item.code)
                 })
                 this.value = s.join(',')
             } else {
-                this.value = this.DSValue.code
+                this.value = val.code
+            }
+
+            if ( this.$root.select_var ) {
+                window[this.$root.select_var] = this.value
+                console.log(this.$root.select_var, val.code)
             }
         }
     },
     mounted: function() {
-        this.DSOptions = this.$root.dsItems
+
+        
+        
+        let url = 'https://ya.boretscy.space/api/'+this.$root.api_data+'?'+this.$root.get_params
+        if ( this.$root.parent_var ) url += '&'+this.$root.parent_name+'='+this.parent_var_value
+        if ( !this.$root.parent_var ) {
+            this.axios.get(url).then((response) => {
+                this.options = response.data
+            })
+        } else {
+            setInterval(() => {
+                if ( this.parent_var_value != window[this.$root.parent_var] ) {
+                    this.parent_var_value = window[this.$root.parent_var]
+                    
+                    url = 'https://ya.boretscy.space/api/'+this.$root.api_data+'?'+this.$root.get_params
+                    url += '&'+this.$root.parent_name+'='+this.parent_var_value
+                    this.axios.get(url).then((response) => {
+                        this.options = response.data
+                        this.RValue = []
+                        if ( this.options.length == 1 ) {
+                            if ( this.$root.mode == 'multi' ) {
+                                this.RValue.push(this.options[0]);
+                            } else {
+                                this.RValue = this.options[0];
+                            }
+                        }
+                            
+                    })
+                    console.log(url)
+                }
+            }, 200)
+        }
+
+        
     }
 }
 </script>
