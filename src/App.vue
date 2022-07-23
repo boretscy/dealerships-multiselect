@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="col-12 mb-3">
         <input type="hidden" :name="$root.input_name" v-model="value" />
         <multiselect 
             v-model="RValue" 
