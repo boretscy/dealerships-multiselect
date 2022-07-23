@@ -33,7 +33,7 @@ export default {
             value: null,
             RValue: [],
             options: [],
-            parent_var_value: window[this.$root.parent_var]
+            parent_var_value: window[this.$root.parent_var] || null
         }
     },
     watch: {
@@ -57,11 +57,9 @@ export default {
     },
     mounted: function() {
 
-        
-        
         let url = 'https://ya.boretscy.space/api/'+this.$root.api_data+'?'+this.$root.get_params
-        if ( this.$root.parent_var ) url += '&'+this.$root.parent_name+'='+this.parent_var_value
-        if ( !this.$root.parent_var ) {
+        if ( this.parent_var_value ) url += '&'+this.$root.parent_name+'='+this.parent_var_value
+        if ( !this.parent_var_value ) {
             this.axios.get(url).then((response) => {
                 this.options = response.data
             })
