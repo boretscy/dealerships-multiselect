@@ -63,30 +63,28 @@ export default {
             this.axios.get(url).then((response) => {
                 this.options = response.data
             })
-        } else {
-            setInterval(() => {
-                if ( this.parent_var_value != window[this.$root.parent_var] ) {
-                    this.parent_var_value = window[this.$root.parent_var]
-                    
-                    url = 'https://ya.boretscy.space/api/'+this.$root.api_data+'?'+this.$root.get_params
-                    url += '&'+this.$root.parent_name+'='+this.parent_var_value
-                    this.axios.get(url).then((response) => {
-                        this.options = response.data
-                        this.RValue = []
-                        if ( this.options.length == 1 ) {
-                            if ( this.$root.mode == 'multi' ) {
-                                this.RValue.push(this.options[0]);
-                            } else {
-                                this.RValue = this.options[0];
-                            }
-                        }
-                            
-                    })
-                    console.log(url)
-                }
-            }, 200)
         }
 
+        setInterval(() => {
+            if ( this.parent_var_value != window[this.$root.parent_var] ) {
+                this.parent_var_value = window[this.$root.parent_var]
+                
+                url = 'https://ya.boretscy.space/api/'+this.$root.api_data+'?'+this.$root.get_params
+                url += '&'+this.$root.parent_name+'='+this.parent_var_value
+                this.axios.get(url).then((response) => {
+                    this.options = response.data
+                    this.RValue = []
+                    if ( this.options.length == 1 ) {
+                        if ( this.$root.mode == 'multi' ) {
+                            this.RValue.push(this.options[0]);
+                        } else {
+                            this.RValue = this.options[0];
+                        }
+                    }
+                        
+                })
+            }
+        }, 200)
         
     }
 }
