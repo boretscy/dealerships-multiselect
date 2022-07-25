@@ -20,6 +20,7 @@ apps.forEach( function(a) {
         name: a.getAttribute('name'),
         input_name: a.getAttribute('input_name'),
         placeholder: a.getAttribute('placeholder'),
+        required: ( a.getAttribute('required') == 'Y' ) ? true : false,
         instns: a.id
     })
 })

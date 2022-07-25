@@ -1,6 +1,6 @@
 <template>
     <div class="col-12 mb-3">
-        <input type="hidden" :name="$root.input_name" v-model="value" />
+        <input type="hidden" :name="$root.input_name" v-model="value" :required="$root.required"/>
         <multiselect 
             v-model="RValue" 
             tag-placeholder="Ничего не выбрано" 
