@@ -90,7 +90,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 fieldset[disabled] .multiselect {
   pointer-events: none;
 }
@@ -224,7 +224,7 @@ fieldset[disabled] .multiselect {
   display: block;
   padding: 10px 40px 0 10px;
   border-radius: 5px;
-  border: 1px solid var(--yagray) !important;
+  border: 1px solid var(--yagray);
   background: var(--yawhite);
   font-size: 14px;
   min-height: 45px;
