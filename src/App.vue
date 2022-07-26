@@ -316,7 +316,7 @@ fieldset[disabled] .multiselect {
   content: "";
 }
 .multiselect__placeholder {
-  color: var(--yablack);
+  color: var(--yamiddlegray);
   display: inline-block;
   margin-bottom: 10px;
   padding-top: 2px;
