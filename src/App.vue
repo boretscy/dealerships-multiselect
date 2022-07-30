@@ -38,7 +38,7 @@ export default {
     },
     watch: {
         RValue: function( val ) {
-            console.log( val )
+          
             if ( this.$root.mode == 'multi' ) {
                 let s = []
                 val.forEach( function(item) {
@@ -51,13 +51,12 @@ export default {
 
             if ( this.$root.select_var ) {
                 window[this.$root.select_var] = this.value
-                console.log(this.$root.select_var, val.code)
             }
         }
     },
     mounted: function() {
 
-        let url = 'https://ya.boretscy.space/api/'+this.$root.api_data+'?'+this.$root.get_params
+        let url = '/api/'+this.$root.api_data+'?'+this.$root.get_params
         if ( this.parent_var_value ) url += '&'+this.$root.parent_name+'='+this.parent_var_value
         if ( !this.parent_var_value ) {
             this.axios.get(url).then((response) => {
@@ -69,7 +68,7 @@ export default {
             if ( this.parent_var_value != window[this.$root.parent_var] ) {
                 this.parent_var_value = window[this.$root.parent_var]
                 
-                url = 'https://ya.boretscy.space/api/'+this.$root.api_data+'?'+this.$root.get_params
+                url = '/api/'+this.$root.api_data+'?'+this.$root.get_params
                 url += '&'+this.$root.parent_name+'='+this.parent_var_value
                 this.axios.get(url).then((response) => {
                     this.options = response.data
